@@ -67,7 +67,9 @@ async function main() {
   const invalidValue = findInvalidValueInSequence(values);
   console.log('invalid value:', invalidValue);
 
+  const sT = new Date();
   const rangeWithSum = findRangeWithSum(values, invalidValue);
+  console.log('range took:', new Date() - sT);
   console.log('find range with sum: ', rangeWithSum);
   console.log('encryption weakness:', Math.min(...rangeWithSum) + Math.max(...rangeWithSum));
 }
