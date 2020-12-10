@@ -6,7 +6,7 @@ const values = new Array();
 const preambleLength = 25;
 
 async function processLineByLine() {
-  const fileStream = fs.createReadStream('data.test');
+  const fileStream = fs.createReadStream('data');
 
   const rl = readline.createInterface({
     input: fileStream,
@@ -58,12 +58,28 @@ function getDistribution(arr) {
 
 function getNoofPermutations(arr) {
 
-
   const jumpsPerPosition = arr.map((val, ix) => getNoofJumpsAvailable(arr, ix));
-  jumpsPerPosition.reduce((prev, curr, ix, arr) => {
+  //console.log(jumpsPerPosition);
 
-  });
+  const summedJumps = new Array();
+  let currSum = 0;
   
+  jumpsPerPosition.forEach((value, ix) => {
+    if (value == 1) {
+      if (currSum > 0) {
+        summedJumps.push(currSum > 2 ? currSum -1 : currSum);
+        currSum = 0;
+      }
+    } else {
+      currSum += value;
+    }
+  });
+
+  //console.log(summedJumps);
+
+  const noofPerms = summedJumps.reduce((prev, curr) => prev * curr, 1);
+
+  return noofPerms;  
 }
 
 function getNoofJumpsAvailable(arr, ix) {
@@ -91,10 +107,10 @@ async function main() {
   diffs = getDiffs();
   distribution = getDistribution(diffs);
   
-  console.log(values);
-  console.log(getDistribution(diffs));
+  //console.log(values);
+  //console.log(getDistribution(diffs));
   console.log(distribution[1] * distribution[3]);
 
-  getNoofPermutations(values);
+  console.log(getNoofPermutations(values));
 }
 main();
