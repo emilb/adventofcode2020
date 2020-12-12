@@ -3,7 +3,6 @@ const { prependOnceListener } = require('process');
 const readline = require('readline');
 
 const values = new Array();
-const preambleLength = 25;
 
 async function processLineByLine() {
   const fileStream = fs.createReadStream('data');
