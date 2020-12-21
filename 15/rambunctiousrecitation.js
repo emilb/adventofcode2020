@@ -19,7 +19,6 @@ function play(initalValues, noofIterations) {
 
     counter++;
     lastValue = newValue;
-    //console.log(counter + ': ' + lastValue);
   }
 
   return lastValue;
